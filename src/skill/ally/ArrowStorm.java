@@ -28,19 +28,19 @@ public class ArrowStorm extends DamageSkill implements TargetSelectable {
 
 	@Override
 	public void selectTarget() {
-		for (Node n: GameLogic.currentStage.getStageCharaPane().getChildren()) {
+		for (Node n: GameLogic.getCurrentStage().getStageCharaPane().getChildren()) {
 			n.setDisable(true);
 		}
-		for (Enemy e: GameLogic.enemies) {
-			GameLogic.currentStage.getStageCharaPane().getChildren().get(GameLogic.enemies.indexOf(e) + 5).setDisable(false);
+		for (Enemy e: GameLogic.getEnemies()) {
+			GameLogic.getCurrentStage().getStageCharaPane().getChildren().get(GameLogic.getEnemies().indexOf(e) + 5).setDisable(false);
 		}
 	}
 
 	@Override
 	public void cast() {
 		getTargets().clear();
-		for (Enemy e: GameLogic.enemies) {
-			GameLogic.currentSkill.getTargets().add(e);
+		for (Enemy e: GameLogic.getEnemies()) {
+			GameLogic.getCurrentSkill().getTargets().add(e);
 		}
 		super.cast();
 	}
@@ -57,17 +57,17 @@ public class ArrowStorm extends DamageSkill implements TargetSelectable {
 		iv.setFitWidth(150);
 		animation.getChildren().add(iv);
 		animation.setSpacing(100);
-		for(BaseCharacter e : GameLogic.enemies) {
+		for(BaseCharacter e : GameLogic.getEnemies()) {
 			if (!((Enemy) (e)).isAlive()) {
 				animation.getChildren().add(new CorpseSprite(((Enemy) (e)).getClassName()));
 			} else {
 				animation.getChildren().add(new AttackedSprite(((Enemy) (e)).getClassName()));
 			}
 		}
-		CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-		GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-		GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-		GameLogic.currentStage.getBattlePane().showBattleText("RANGER used ARROW STORM!");
+		CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+		GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+		GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+		GameLogic.getCurrentStage().getBattlePane().showBattleText("RANGER used ARROW STORM!");
 		Audio.attack.stop();
 		Audio.attack.play();
 
@@ -82,41 +82,41 @@ public class ArrowStorm extends DamageSkill implements TargetSelectable {
 				GameLogic.getCurrentStage().getBattlePane().getChildren().add(0,tmp);
 				}
 				if(time == 100) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
-					GameLogic.currentStage.getBattlePane().showBattleText(result[0]);
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().showBattleText(result[0]);
 				}
 				if(time == 175) {
 					if (result.length > 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[1]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[1]);
 					} else if (result.length == 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 250) {
 					if (result.length > 2) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[2]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[2]);
 					} else if (result.length == 2) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 325) {
 					if (result.length > 3) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[3]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[3]);
 					} else if (result.length == 3) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 400 && result.length == 4) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 					GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 					GameLogic.nextTurn();
 				}

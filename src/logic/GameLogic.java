@@ -35,22 +35,22 @@ import skill.base.BaseSkill;
 
 public class GameLogic {
 	
-	public static ArrayList<Ally> team;
-	public static ArrayList<Enemy> enemies;
-	public static ArrayList<ArrayList<Enemy>> villains;
-	public static PriorityQueue<BaseCharacter> q;
-	public static int stage;
+	private static ArrayList<Ally> team;
+	private static ArrayList<Enemy> enemies;
+	private static ArrayList<ArrayList<Enemy>> villains;
+	private static PriorityQueue<BaseCharacter> queue;
+	private static int stage;
 	private static boolean isGameEnd;
-	public static boolean win;
+	private static boolean isWin;
 	private static boolean isStageCleared;
-	public static BattleStage currentStage;
-	public static BaseCharacter currentChara;
-	public static BaseSkill currentSkill;
+	private static BattleStage currentStage;
+	private static BaseCharacter currentCharacter;
+	private static BaseSkill currentSkill;
 	
 	public static void newGame() {
 		isStageCleared = false;
 		isGameEnd = false;
-		win = false;
+		isWin = false;
 		addEnemiesToVillains();
 		stage = 1;
 		beginStage(stage);
@@ -99,7 +99,7 @@ public class GameLogic {
 			}
 			
 		});
-		if (win) {
+		if (isWin) {
 			Text text = new Text("YOU WIN!!");
 			text.setFont(font2);
 			text.setFill(Color.WHITE);
@@ -164,16 +164,16 @@ public class GameLogic {
 				beginStage(stage);
 			}
 		} else {
-			if (q.isEmpty()) generateQueue();
-			currentChara = q.poll();
-			if(currentChara instanceof Ally) {
+			if (queue.isEmpty()) generateQueue();
+			currentCharacter = queue.poll();
+			if(currentCharacter instanceof Ally) {
 				GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 			}
 			else {
 				GameLogic.getCurrentStage().getBattlePane().disableSkillMenu();
 
 			}
-			currentChara.beginTurn();
+			currentCharacter.beginTurn();
 		}
 		
 	}
@@ -190,7 +190,7 @@ public class GameLogic {
 			enemy.setCalculatedSpd(randomRange(1, 8) + enemy.getSpd());
 			q.add(enemy);
 		}
-		GameLogic.q = q;
+		queue = q;
 		
 	}
 	
@@ -282,16 +282,19 @@ public class GameLogic {
     	return s;
     }
 	
-	public static void setGameEnd(boolean isGameEnd) {
-		GameLogic.isGameEnd = isGameEnd;
+	public void addHero(Ally hero) {
+		team.add(hero);
 	}
 	
-	public static void setStageCleared(boolean isStageCleared) {
-		GameLogic.isStageCleared = isStageCleared;
+	public void removeHero(Ally hero) {
+		team.remove(hero);
+	}
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
 	}
 	
-	public static void setWin(boolean win) {
-		GameLogic.win = win;
+	public void removeEnemy(Enemy enemy) {
+		enemies.remove(enemy);
 	}
 
 	public static ArrayList<Ally> getTeam() {
@@ -302,6 +305,14 @@ public class GameLogic {
 		GameLogic.team = team;
 	}
 
+	public static ArrayList<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public static void setEnemies(ArrayList<Enemy> enemies) {
+		GameLogic.enemies = enemies;
+	}
+
 	public static ArrayList<ArrayList<Enemy>> getVillains() {
 		return villains;
 	}
@@ -310,12 +321,68 @@ public class GameLogic {
 		GameLogic.villains = villains;
 	}
 
+	public static PriorityQueue<BaseCharacter> getQueue() {
+		return queue;
+	}
+
+	public static void setQueue(PriorityQueue<BaseCharacter> q) {
+		GameLogic.queue = q;
+	}
+
+	public static int getStage() {
+		return stage;
+	}
+
+	public static void setStage(int stage) {
+		GameLogic.stage = stage;
+	}
+
+	public static boolean isGameEnd() {
+		return isGameEnd;
+	}
+
+	public static void setGameEnd(boolean isGameEnd) {
+		GameLogic.isGameEnd = isGameEnd;
+	}
+
+	public static boolean isWin() {
+		return isWin;
+	}
+
+	public static void setWin(boolean isWin) {
+		GameLogic.isWin = isWin;
+	}
+
+	public static boolean isStageCleared() {
+		return isStageCleared;
+	}
+
+	public static void setStageCleared(boolean isStageCleared) {
+		GameLogic.isStageCleared = isStageCleared;
+	}
+
 	public static BattleStage getCurrentStage() {
 		return currentStage;
 	}
 
 	public static void setCurrentStage(BattleStage currentStage) {
 		GameLogic.currentStage = currentStage;
+	}
+
+	public static BaseCharacter getCurrentCharacter() {
+		return currentCharacter;
+	}
+
+	public static void setCurrentCharacter(BaseCharacter currentCharacter) {
+		GameLogic.currentCharacter = currentCharacter;
+	}
+
+	public static BaseSkill getCurrentSkill() {
+		return currentSkill;
+	}
+
+	public static void setCurrentSkill(BaseSkill currentSkill) {
+		GameLogic.currentSkill = currentSkill;
 	}
 
 }

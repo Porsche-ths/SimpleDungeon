@@ -15,19 +15,19 @@ public class BattleStage  {
 	public BattleStage(int n) {
 		stageNumber = n;
 		String stage = "";
-		if(GameLogic.stage == 1) {
+		if(GameLogic.getStage() == 1) {
 			stage = "stageOne.png";
 		}
-		if(GameLogic.stage == 2) {
+		if(GameLogic.getStage() == 2) {
 			stage = "stageTwo.png";
 		}
-		if(GameLogic.stage == 3) {
+		if(GameLogic.getStage() == 3) {
 			stage = "stageThree.png";
 		}
-		if(GameLogic.stage == 4) {
+		if(GameLogic.getStage() == 4) {
 			stage = "stageFour.png";
 		}
-		if(GameLogic.stage == 5) {
+		if(GameLogic.getStage() == 5) {
 			stage = "stageFive.png";
 		}
 		Image bg = new Image(ClassLoader.getSystemResource(stage).toString());

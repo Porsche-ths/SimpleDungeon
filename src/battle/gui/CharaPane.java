@@ -68,9 +68,9 @@ public class CharaPane extends HBox {
 					
 					GameLogic.getCurrentStage().getBattlePane().disableSkillMenu();
 					disableCharaBox();
-					GameLogic.currentSkill.getTargets().add(a);
-					GameLogic.currentSkill.playAnimation();
-					GameLogic.currentSkill.cast();
+					GameLogic.getCurrentSkill().getTargets().add(a);
+					GameLogic.getCurrentSkill().playAnimation();
+					GameLogic.getCurrentSkill().cast();
 					charaBox.setDisable(true);
 
 				}
@@ -112,11 +112,11 @@ public class CharaPane extends HBox {
 				@Override
 				public void handle(Event arg0) {
 					
-					GameLogic.currentSkill.getTargets().add(a);
+					GameLogic.getCurrentSkill().getTargets().add(a);
 					GameLogic.getCurrentStage().getBattlePane().disableSkillMenu();
 					disableCharaBox();
-					GameLogic.currentSkill.playAnimation();
-					GameLogic.currentSkill.cast();
+					GameLogic.getCurrentSkill().playAnimation();
+					GameLogic.getCurrentSkill().cast();
 				}
 				
 			});

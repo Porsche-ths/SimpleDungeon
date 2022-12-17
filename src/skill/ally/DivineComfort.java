@@ -28,19 +28,19 @@ public class DivineComfort extends HealSkill implements TargetSelectable {
 
 	@Override
 	public void selectTarget() {
-		for (Node n: GameLogic.currentStage.getStageCharaPane().getChildren()) {
+		for (Node n: GameLogic.getCurrentStage().getStageCharaPane().getChildren()) {
 			n.setDisable(true);
 		}
-		for (Ally a: GameLogic.team) {
-			GameLogic.currentStage.getStageCharaPane().getChildren().get(GameLogic.team.indexOf(a) + 4 - GameLogic.team.size()).setDisable(false);
+		for (Ally a: GameLogic.getTeam()) {
+			GameLogic.getCurrentStage().getStageCharaPane().getChildren().get(GameLogic.getTeam().indexOf(a) + 4 - GameLogic.getTeam().size()).setDisable(false);
 		}
 	}
 
 	@Override
 	public void cast() {
 		getTargets().clear();
-		for (Ally hero: GameLogic.team) {
-			GameLogic.currentSkill.getTargets().add(hero);
+		for (Ally hero: GameLogic.getTeam()) {
+			GameLogic.getCurrentSkill().getTargets().add(hero);
 		}
 		super.cast();
 	}
@@ -58,7 +58,7 @@ public class DivineComfort extends HealSkill implements TargetSelectable {
 		iv.setFitWidth(100);
 		animation.getChildren().add(iv);
 		animation.setSpacing(100);
-		for(BaseCharacter e : GameLogic.team) {
+		for(BaseCharacter e : GameLogic.getTeam()) {
 			if (e != getUser()) {
 				StackPane healBox = new StackPane();
 				healBox.setAlignment(Pos.CENTER);
@@ -68,10 +68,10 @@ public class DivineComfort extends HealSkill implements TargetSelectable {
 
 			}
 		}
-		CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-		GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-		GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-		GameLogic.currentStage.getBattlePane().showBattleText("PRIEST used DIVINE COMFORT!");
+		CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+		GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+		GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+		GameLogic.getCurrentStage().getBattlePane().showBattleText("PRIEST used DIVINE COMFORT!");
 		Audio.heal.stop();
 		Audio.heal.play();
 
@@ -88,41 +88,41 @@ public class DivineComfort extends HealSkill implements TargetSelectable {
 				
 				}
 				if(time == 100) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
-					GameLogic.currentStage.getBattlePane().showBattleText(result[0]);
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().showBattleText(result[0]);
 				}
 				if(time == 175) {
 					if (result.length > 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[1]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[1]);
 					} else if (result.length == 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 250) {
 					if (result.length > 2) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[2]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[2]);
 					} else if (result.length == 2) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 325) {
 					if (result.length > 3) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[3]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[3]);
 					} else if (result.length == 3) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 400 && result.length == 4) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 					GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 					GameLogic.nextTurn();
 				}

@@ -64,10 +64,10 @@ public class RavenousFeast extends DamageSkill {
 			iv.setFitWidth(250);
 			animation.getChildren().add(new AttackedSprite(((Ally)(e)).getClassName()));
 			animation.getChildren().add(iv);
-			CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-			GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-			GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-			GameLogic.currentStage.getBattlePane().showBattleText("HEMOMANCER used RAVENOUS FEAST!");
+			CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+			GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+			GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+			GameLogic.getCurrentStage().getBattlePane().showBattleText("HEMOMANCER used RAVENOUS FEAST!");
 			Audio.attack.stop();
 			Audio.attack.play();
 			AnimationTimer timer = new AnimationTimer() {
@@ -80,19 +80,19 @@ public class RavenousFeast extends DamageSkill {
 					GameLogic.getCurrentStage().getBattlePane().getChildren().add(0,tmp);
 					}
 					if(time == 100) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result);
 					}
 					if(time == 175 && !healResult.equals("")) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(healResult);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(healResult);
 					}
 					if(time == 250 && !healResult.equals("")) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.nextTurn();
 					}
 					if(time == 175 && healResult.equals("")) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.nextTurn();
 					}
 				};

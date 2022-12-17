@@ -38,10 +38,10 @@ public class BonySlash extends DamageSkill {
 			iv.setFitWidth(170);
 			animation.getChildren().add(new AttackedSprite(((Ally)(e)).getClassName()));
 			animation.getChildren().add(iv);
-			CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-			GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-			GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-			GameLogic.currentStage.getBattlePane().showBattleText("SKELLY SOLDIER used BONY SLASH!");
+			CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+			GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+			GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+			GameLogic.getCurrentStage().getBattlePane().showBattleText("SKELLY SOLDIER used BONY SLASH!");
 			Audio.attack.stop();
 			Audio.attack.play();
 
@@ -55,11 +55,11 @@ public class BonySlash extends DamageSkill {
 					GameLogic.getCurrentStage().getBattlePane().getChildren().add(0,tmp);
 					}
 					if(time == 100) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(getResult());
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(getResult());
 					}
 					if(time == 175) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.nextTurn();
 					}
 				};

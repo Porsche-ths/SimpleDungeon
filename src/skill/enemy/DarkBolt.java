@@ -45,10 +45,10 @@ public class DarkBolt extends DamageSkill {
 			animation.getChildren().add(targetBox);
 			animation.getChildren().add(iv);
 
-			CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-			GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-			GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-			GameLogic.currentStage.getBattlePane().showBattleText("DARK LORD used DARK BOLT!");
+			CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+			GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+			GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+			GameLogic.getCurrentStage().getBattlePane().showBattleText("DARK LORD used DARK BOLT!");
 			Audio.darkLord.stop();
 			Audio.darkLord.play();
 
@@ -62,11 +62,11 @@ public class DarkBolt extends DamageSkill {
 					GameLogic.getCurrentStage().getBattlePane().getChildren().add(0,tmp);
 					}
 					if(time == 100) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(getResult());
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(getResult());
 					}
 					if(time == 175) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.nextTurn();
 					}
 				};

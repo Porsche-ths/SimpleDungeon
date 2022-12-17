@@ -22,14 +22,14 @@ public class Enemy extends BaseCharacter {
 				setMaxHp(10);
 				GameLogic.getCurrentStage().getStageCharaPane().getChildren().clear();
 				GameLogic.getCurrentStage().getStageCharaPane().addCharToPane();
-				for(BaseCharacter e :GameLogic.team) {
+				for(BaseCharacter e :GameLogic.getTeam()) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
-				for(BaseCharacter e :GameLogic.enemies) {
+				for(BaseCharacter e :GameLogic.getEnemies()) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
 				boolean allDead = true;
-				for (Enemy e: GameLogic.enemies) {
+				for (Enemy e: GameLogic.getEnemies()) {
 					if (e.isAlive()) {
 						allDead = false;
 						break;
@@ -41,15 +41,15 @@ public class Enemy extends BaseCharacter {
 			}
 		} else {
 			if (getHp() == 0) {
-				GameLogic.enemies.remove(this);
-				if (GameLogic.q.contains(this)) { GameLogic.q.remove(this); }
-				if (GameLogic.enemies.isEmpty()) {
+				GameLogic.getEnemies().remove(this);
+				if (GameLogic.getQueue().contains(this)) { GameLogic.getQueue().remove(this); }
+				if (GameLogic.getEnemies().isEmpty()) {
 					GameLogic.setStageCleared(true);
 				} else {
 					GameLogic.getCurrentStage().getStageCharaPane().getChildren().clear();
 					GameLogic.getCurrentStage().getStageCharaPane().addCharToPane();
 					int n = 0;
-					for (Enemy e: GameLogic.enemies) {
+					for (Enemy e: GameLogic.getEnemies()) {
 						switch(n) {
 						case 0:
 							e.setRank(logic.rank.first); break;
@@ -62,10 +62,10 @@ public class Enemy extends BaseCharacter {
 						}
 						n++;
 					}
-					for(BaseCharacter e :GameLogic.team) {
+					for(BaseCharacter e :GameLogic.getTeam()) {
 						GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 					}
-					for(BaseCharacter e :GameLogic.enemies) {
+					for(BaseCharacter e :GameLogic.getEnemies()) {
 						GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 					}
 				}

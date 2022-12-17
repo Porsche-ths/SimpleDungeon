@@ -28,12 +28,12 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 
 	@Override
 	public void selectTarget() {
-		for (Node n: GameLogic.currentStage.getStageCharaPane().getChildren()) {
+		for (Node n: GameLogic.getCurrentStage().getStageCharaPane().getChildren()) {
 			n.setDisable(true);
 		}
-		for (Enemy e: GameLogic.enemies) {
+		for (Enemy e: GameLogic.getEnemies()) {
 			if (e.getRank().equals(logic.rank.second) || e.getRank().equals(logic.rank.third)) {
-				GameLogic.currentStage.getStageCharaPane().getChildren().get(GameLogic.enemies.indexOf(e) + 5).setDisable(false);
+				GameLogic.getCurrentStage().getStageCharaPane().getChildren().get(GameLogic.getEnemies().indexOf(e) + 5).setDisable(false);
 			}
 		}
 	}
@@ -41,9 +41,9 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 	@Override
 	public void cast() {
 		getTargets().clear();
-		for (Enemy e: GameLogic.enemies) {
+		for (Enemy e: GameLogic.getEnemies()) {
 			if (e.getRank().equals(logic.rank.second) || e.getRank().equals(logic.rank.third)) {
-				GameLogic.currentSkill.getTargets().add(e);
+				GameLogic.getCurrentSkill().getTargets().add(e);
 			}
 		}
 		super.cast();
@@ -61,7 +61,7 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 		iv.setFitWidth(170);
 		animation.getChildren().add(iv);
 		animation.setSpacing(200);
-		for(BaseCharacter e : GameLogic.enemies) {
+		for(BaseCharacter e : GameLogic.getEnemies()) {
 			if (e.getRank().equals(logic.rank.second) || e.getRank().equals(logic.rank.third)) {
 				if (!((Enemy) (e)).isAlive()) {
 					animation.getChildren().add(new CorpseSprite(((Enemy) (e)).getClassName()));
@@ -69,10 +69,10 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 					animation.getChildren().add(new AttackedSprite(((Enemy) (e)).getClassName()));
 				}			}
 		}
-		CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-		GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-		GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-		GameLogic.currentStage.getBattlePane().showBattleText("ROGUE used DAGGERS PLAY!");
+		CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+		GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+		GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+		GameLogic.getCurrentStage().getBattlePane().showBattleText("ROGUE used DAGGERS PLAY!");
 		Audio.rogueSkill1.stop();
 		Audio.rogueSkill1.setVolume(10);
 		Audio.rogueSkill1.play();
@@ -88,21 +88,21 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 				GameLogic.getCurrentStage().getBattlePane().getChildren().add(0,tmp);
 				}
 				if(time == 100) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
-					GameLogic.currentStage.getBattlePane().showBattleText(result[0]);
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().showBattleText(result[0]);
 				}
 				if(time == 175) {
 					if (result.length > 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(result[1]);
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(result[1]);
 					} else if (result.length == 1) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 						GameLogic.nextTurn();
 					}
 				}
 				if(time == 250 && result.length == 2) {
-					GameLogic.currentStage.getBattlePane().removeBattleText();
+					GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 					GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 					GameLogic.nextTurn();
 				}

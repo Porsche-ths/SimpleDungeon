@@ -23,7 +23,7 @@ public class SkellyArcher extends Enemy {
 			if (bonyShot.isValid()) {
 				int size = 0;
 				
-				for (Ally hero: GameLogic.team) {
+				for (Ally hero: GameLogic.getTeam()) {
 					if (hero.getRank().equals(logic.rank.second) || hero.getRank().equals(logic.rank.third) || hero.getRank().equals(logic.rank.fourth)) size++;
 				}
 				
@@ -31,7 +31,7 @@ public class SkellyArcher extends Enemy {
 					ArrayList<Pair<Ally, Double>> targetList = new ArrayList<Pair<Ally, Double>>(size);
 					
 					double mod = 100/size;
-					for (Ally hero: GameLogic.team) {
+					for (Ally hero: GameLogic.getTeam()) {
 						if (hero.getRank().equals(logic.rank.second) || hero.getRank().equals(logic.rank.third) || hero.getRank().equals(logic.rank.fourth)) {
 							targetList.add(new Pair<Ally, Double>(hero, mod));
 						}

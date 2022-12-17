@@ -27,10 +27,10 @@ public class Ally extends BaseCharacter{
 		if (isAlive()) {
 			if (getHp() == 0) {
 				setAlive(false);
-				for (Ally each: GameLogic.team) {
+				for (Ally each: GameLogic.getTeam()) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
 				}
-				for(BaseCharacter e :GameLogic.enemies) {
+				for(BaseCharacter e :GameLogic.getEnemies()) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
 			}
@@ -39,15 +39,15 @@ public class Ally extends BaseCharacter{
 				setAlive(true);
 			} else {
 				if (isDeathBlown()) {
-					GameLogic.team.remove(this);
-					if (GameLogic.q.contains(this)) { GameLogic.q.remove(this); }
-					if (GameLogic.team.isEmpty()) {
+					GameLogic.getTeam().remove(this);
+					if (GameLogic.getQueue().contains(this)) { GameLogic.getQueue().remove(this); }
+					if (GameLogic.getTeam().isEmpty()) {
 						GameLogic.setGameEnd(true);
 					} else {
 						GameLogic.getCurrentStage().getStageCharaPane().getChildren().clear();
 						GameLogic.getCurrentStage().getStageCharaPane().addCharToPane();
-						int n = GameLogic.team.size() - 1;
-						for (Ally a: GameLogic.team) {
+						int n = GameLogic.getTeam().size() - 1;
+						for (Ally a: GameLogic.getTeam()) {
 							switch(n) {
 							case 0:
 								a.setRank(logic.rank.first); break;
@@ -60,11 +60,11 @@ public class Ally extends BaseCharacter{
 							}
 							n--;
 						}
-						for (Ally each: GameLogic.team) {
-							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
+						for (Ally ally: GameLogic.getTeam()) {
+							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(ally,100);
 						}
-						for(BaseCharacter e :GameLogic.enemies) {
-							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
+						for(Enemy enemy :GameLogic.getEnemies()) {
+							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(enemy, 100);
 						}
 					}
 				} else {

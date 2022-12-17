@@ -17,13 +17,13 @@ public class DarkLord extends Enemy {
 	
 	@Override
 	public void beginTurn() {
-		int size = GameLogic.team.size();
+		int size = GameLogic.getTeam().size();
 		
 		if (size != 0) {
 			ArrayList<Pair<Ally, Double>> targetList = new ArrayList<Pair<Ally, Double>>(size);
 			
 			double mod = 100/size;
-			for (Ally hero: GameLogic.team) {
+			for (Ally hero: GameLogic.getTeam()) {
 				targetList.add(new Pair<Ally, Double>(hero, mod));
 			}
 			

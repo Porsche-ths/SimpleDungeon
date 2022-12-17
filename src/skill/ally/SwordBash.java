@@ -28,12 +28,12 @@ public class SwordBash extends DamageSkill implements TargetSelectable {
 
 	@Override
 	public void selectTarget() {
-		for (Node n : GameLogic.currentStage.getStageCharaPane().getChildren()) {
+		for (Node n : GameLogic.getCurrentStage().getStageCharaPane().getChildren()) {
 			n.setDisable(true);
 		}
-		for (Enemy e : GameLogic.enemies) {
+		for (Enemy e : GameLogic.getEnemies()) {
 			if (e.getRank().equals(logic.rank.first) || e.getRank().equals(logic.rank.second)) {
-				GameLogic.currentStage.getStageCharaPane().getChildren().get(GameLogic.enemies.indexOf(e) + 5)
+				GameLogic.getCurrentStage().getStageCharaPane().getChildren().get(GameLogic.getEnemies().indexOf(e) + 5)
 						.setDisable(false);
 			}
 		}
@@ -58,10 +58,10 @@ public class SwordBash extends DamageSkill implements TargetSelectable {
 			} else {
 				animation.getChildren().add(new AttackedSprite(((Enemy) (e)).getClassName()));
 			}
-			CharaPane tmp = GameLogic.currentStage.getStageCharaPane();
-			GameLogic.currentStage.getBattlePane().getChildren().remove(GameLogic.currentStage.getStageCharaPane());
-			GameLogic.currentStage.getBattlePane().getChildren().add(0, animation);
-			GameLogic.currentStage.getBattlePane().showBattleText("CRUSADER used SWORD BASH!");
+			CharaPane tmp = GameLogic.getCurrentStage().getStageCharaPane();
+			GameLogic.getCurrentStage().getBattlePane().getChildren().remove(GameLogic.getCurrentStage().getStageCharaPane());
+			GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, animation);
+			GameLogic.getCurrentStage().getBattlePane().showBattleText("CRUSADER used SWORD BASH!");
 			Audio.attack.stop();
 			Audio.attack.play();
 			AnimationTimer timer = new AnimationTimer() {
@@ -75,11 +75,11 @@ public class SwordBash extends DamageSkill implements TargetSelectable {
 						GameLogic.getCurrentStage().getBattlePane().getChildren().add(0, tmp);
 					}
 					if(time == 100) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
-						GameLogic.currentStage.getBattlePane().showBattleText(getResult());
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().showBattleText(getResult());
 					}
 					if(time == 175) {
-						GameLogic.currentStage.getBattlePane().removeBattleText();
+						GameLogic.getCurrentStage().getBattlePane().removeBattleText();
 						GameLogic.nextTurn();
 					}
 				};

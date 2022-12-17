@@ -23,7 +23,7 @@ public class SkellySoldier extends Enemy {
 			if (bonySlash.isValid()) {
 				int size = 0;
 				
-				for (Ally hero: GameLogic.team) {
+				for (Ally hero: GameLogic.getTeam()) {
 					if (hero.getRank().equals(logic.rank.first) || hero.getRank().equals(logic.rank.second)) size++;
 				}
 				
@@ -31,7 +31,7 @@ public class SkellySoldier extends Enemy {
 					ArrayList<Pair<Ally, Double>> targetList = new ArrayList<Pair<Ally, Double>>(size);
 					
 					double mod = 100/size;
-					for (Ally hero: GameLogic.team) {
+					for (Ally hero: GameLogic.getTeam()) {
 						if (hero.getRank().equals(logic.rank.first) || hero.getRank().equals(logic.rank.second)) {
 							targetList.add(new Pair<Ally, Double>(hero, mod));
 						}

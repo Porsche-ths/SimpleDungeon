@@ -21,13 +21,13 @@ public class Hemomancer extends Enemy {
 			RavenousFeast ravenousFeast = (RavenousFeast) getSkills().get(0);
 			ravenousFeast.setValid();
 			if (ravenousFeast.isValid()) {
-				int size = GameLogic.team.size();
+				int size = GameLogic.getTeam().size();
 				
 				if (size != 0) {
 					ArrayList<Pair<Ally, Double>> targetList = new ArrayList<Pair<Ally, Double>>(size);
 					
 					double mod = 100/size;
-					for (Ally hero: GameLogic.team) {
+					for (Ally hero: GameLogic.getTeam()) {
 						targetList.add(new Pair<Ally, Double>(hero, mod));
 					}
 					

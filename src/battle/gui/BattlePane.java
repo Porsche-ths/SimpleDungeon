@@ -61,10 +61,10 @@ public class BattlePane extends VBox{
 		skillMenu.setHgap(100);
 		skillMenu.setPrefHeight(200);
 		skillMenu.setPrefWidth(700);
-		if (GameLogic.currentChara instanceof Ally) {
+		if (GameLogic.getCurrentCharacter() instanceof Ally) {
 			int i = 0;
 			boolean playable = false;
-			for (BaseSkill s: GameLogic.currentChara.getSkills()) {
+			for (BaseSkill s: GameLogic.getCurrentCharacter().getSkills()) {
 				StackPane skillButton = new StackPane();
 				skillButton.setAlignment(Pos.CENTER);
 				skillButton.setMaxHeight(75);
@@ -83,7 +83,7 @@ public class BattlePane extends VBox{
 						public void handle(Event arg0) {
 							Audio.click.stop();
 							Audio.click.play();
-							GameLogic.currentSkill = s;
+							GameLogic.setCurrentSkill(s);
 							((TargetSelectable) s).selectTarget();
 							Image img = new Image(ClassLoader.getSystemResource("selected" +s.getSkillName() + ".png").toString());
 							ImageView selectedSkill = new ImageView(img);
@@ -94,7 +94,7 @@ public class BattlePane extends VBox{
 
 								@Override
 								public void handle(long arg0) {
-									if(GameLogic.currentSkill!=s) {
+									if(GameLogic.getCurrentSkill() != s) {
 										skillButton.getChildren().remove(1);
 										stop();
 									}
