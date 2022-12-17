@@ -2,21 +2,21 @@ package skill.base;
 
 import java.util.ArrayList;
 
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 
 public abstract class BaseSkill {
 	
 	protected String skillName;
-	protected Chara user;
+	protected BaseCharacter user;
 	protected ArrayList<logic.rank> rank;
 	protected boolean isValid;
-	protected ArrayList<Chara> targets;
+	protected ArrayList<BaseCharacter> targets;
 	
-	public BaseSkill(String skillName, Chara user, ArrayList<logic.rank> rank) {
+	public BaseSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank) {
 		this.setSkillName(skillName);
 		this.user = user;
 		this.setRank(rank);
-		this.setTargets(new ArrayList<Chara>());
+		this.setTargets(new ArrayList<BaseCharacter>());
 	}
 	
 	public abstract void cast();
@@ -53,15 +53,15 @@ public abstract class BaseSkill {
 		this.rank = rank;
 	}
 
-	public ArrayList<Chara> getTargets() {
+	public ArrayList<BaseCharacter> getTargets() {
 		return targets;
 	}
 
-	public void setTargets(ArrayList<Chara> targets) {
+	public void setTargets(ArrayList<BaseCharacter> targets) {
 		this.targets = targets;
 	}
 
-	public Chara getUser() {
+	public BaseCharacter getUser() {
 		return user;
 	}
 	

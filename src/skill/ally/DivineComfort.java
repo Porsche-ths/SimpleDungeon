@@ -6,7 +6,7 @@ import java.util.Arrays;
 import audio.Audio;
 import battle.gui.CharaPane;
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +22,7 @@ import sprites.IdleSprite;
 
 public class DivineComfort extends HealSkill implements TargetSelectable {
 
-	public DivineComfort(Chara user) {
+	public DivineComfort(BaseCharacter user) {
 		super("DivineComfort", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third, logic.rank.fourth)), 1, 3);
 	}
 
@@ -58,7 +58,7 @@ public class DivineComfort extends HealSkill implements TargetSelectable {
 		iv.setFitWidth(100);
 		animation.getChildren().add(iv);
 		animation.setSpacing(100);
-		for(Chara e : GameLogic.team) {
+		for(BaseCharacter e : GameLogic.team) {
 			if (e != getUser()) {
 				StackPane healBox = new StackPane();
 				healBox.setAlignment(Pos.CENTER);

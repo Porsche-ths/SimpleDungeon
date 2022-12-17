@@ -2,7 +2,7 @@ package chara.base;
 
 import logic.GameLogic;
 
-public class Ally extends Chara{
+public class Ally extends BaseCharacter{
 	
 	private int deathBlowResist;
 	private int targetPriority;
@@ -30,7 +30,7 @@ public class Ally extends Chara{
 				for (Ally each: GameLogic.team) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
 				}
-				for(Chara e :GameLogic.enemies) {
+				for(BaseCharacter e :GameLogic.enemies) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
 			}
@@ -63,7 +63,7 @@ public class Ally extends Chara{
 						for (Ally each: GameLogic.team) {
 							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
 						}
-						for(Chara e :GameLogic.enemies) {
+						for(BaseCharacter e :GameLogic.enemies) {
 							GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 						}
 					}

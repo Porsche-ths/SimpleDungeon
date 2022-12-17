@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import audio.Audio;
 import battle.gui.CharaPane;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
@@ -22,7 +22,7 @@ import sprites.CorpseSprite;
 
 public class ArrowStorm extends DamageSkill implements TargetSelectable {
 
-	public ArrowStorm(Chara user) {
+	public ArrowStorm(BaseCharacter user) {
 		super("ArrowStorm", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)), -70, 85, 0);
 	}
 
@@ -57,7 +57,7 @@ public class ArrowStorm extends DamageSkill implements TargetSelectable {
 		iv.setFitWidth(150);
 		animation.getChildren().add(iv);
 		animation.setSpacing(100);
-		for(Chara e : GameLogic.enemies) {
+		for(BaseCharacter e : GameLogic.enemies) {
 			if (!((Enemy) (e)).isAlive()) {
 				animation.getChildren().add(new CorpseSprite(((Enemy) (e)).getClassName()));
 			} else {

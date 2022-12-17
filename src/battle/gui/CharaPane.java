@@ -3,7 +3,7 @@ package battle.gui;
 import java.util.ArrayList;
 
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -136,7 +136,7 @@ public class CharaPane extends HBox {
 		}
 
 	}
-	public StackPane initializeHpBar(int width,Chara c) {
+	public StackPane initializeHpBar(int width,BaseCharacter c) {
 		StackPane hpBar = new StackPane();
 		Rectangle hp = new Rectangle(0,0,(c.getHp()/c.getMaxHp()*(width)),10);
 		hpBar.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
@@ -147,7 +147,7 @@ public class CharaPane extends HBox {
 		hpBar.getChildren().add(hp);
 		return hpBar;
 	}
-	public void updateHpBar(Chara c, double defaultWidth) {
+	public void updateHpBar(BaseCharacter c, double defaultWidth) {
 		if (c instanceof Ally || c.getHp() != 0) {
 			int n = 0;
 	

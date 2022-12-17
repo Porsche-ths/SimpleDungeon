@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import audio.Audio;
 import battle.gui.CharaPane;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
@@ -22,7 +22,7 @@ import sprites.CorpseSprite;
 
 public class DaggersPlay extends DamageSkill implements TargetSelectable {
 
-	public DaggersPlay(Chara user) {
+	public DaggersPlay(BaseCharacter user) {
 		super("DaggersPlay", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third, logic.rank.fourth)), 0, 90, 5);
 	}
 
@@ -61,7 +61,7 @@ public class DaggersPlay extends DamageSkill implements TargetSelectable {
 		iv.setFitWidth(170);
 		animation.getChildren().add(iv);
 		animation.setSpacing(200);
-		for(Chara e : GameLogic.enemies) {
+		for(BaseCharacter e : GameLogic.enemies) {
 			if (e.getRank().equals(logic.rank.second) || e.getRank().equals(logic.rank.third)) {
 				if (!((Enemy) (e)).isAlive()) {
 					animation.getChildren().add(new CorpseSprite(((Enemy) (e)).getClassName()));

@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import audio.Audio;
 import battle.gui.CharaPane;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
@@ -22,7 +22,7 @@ import sprites.CorpseSprite;
 
 public class SwordBash extends DamageSkill implements TargetSelectable {
 
-	public SwordBash(Chara user) {
+	public SwordBash(BaseCharacter user) {
 		super("SwordBash", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), -50, 90, 0);
 	}
 
@@ -41,7 +41,7 @@ public class SwordBash extends DamageSkill implements TargetSelectable {
 
 	@Override
 	public void playAnimation() {
-		for (Chara e : targets) {
+		for (BaseCharacter e : targets) {
 			HBox animation = new HBox();
 			animation.setPrefWidth(1400);
 			animation.setPrefHeight(740);

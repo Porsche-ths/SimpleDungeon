@@ -3,7 +3,7 @@ package skill.base;
 import java.util.ArrayList;
 
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import logic.GameLogic;
 
@@ -15,7 +15,7 @@ public class DamageSkill extends BaseSkill {
 	private int damageDeal;
 	protected String result;
 	
-	public DamageSkill(String skillName, Chara user, ArrayList<logic.rank> rank, int dmgMod, int acc, int critMod) {
+	public DamageSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank, int dmgMod, int acc, int critMod) {
 		super(skillName, user, rank);
 		this.setDmgMod(dmgMod);
 		this.setAcc(acc);
@@ -25,7 +25,7 @@ public class DamageSkill extends BaseSkill {
 	@Override
 	public void cast() {
 		result = "";
-		for (Chara each: targets) {
+		for (BaseCharacter each: targets) {
 			if (each instanceof Ally) {
 				if (isHit(each)) {
 					damageDeal = computeDamage(each);
@@ -64,7 +64,7 @@ public class DamageSkill extends BaseSkill {
 	@Override
 	public void playAnimation() {}
 	
-	protected boolean isHit(Chara target) {
+	protected boolean isHit(BaseCharacter target) {
 		int finalAcc = user.getAccMod() + getAcc() - target.getDodge();
 		return GameLogic.randomInt() < finalAcc ? true : false;
 	}
@@ -74,7 +74,7 @@ public class DamageSkill extends BaseSkill {
 		return GameLogic.randomInt() < finalCrit ? true : false;
 	}
 	
-	protected int computeDamage(Chara target) {
+	protected int computeDamage(BaseCharacter target) {
 		float damage = (float) (GameLogic.randomRange(user.getMinDmg(), user.getMaxDmg()) * (1 + (((float)dmgMod)/100)));
 		return (int) (isCrit() ? (damage * 1.5) : damage);
 	}

@@ -2,7 +2,7 @@ package chara.base;
 
 import logic.GameLogic;
 
-public class Enemy extends Chara {
+public class Enemy extends BaseCharacter {
 	
 	public Enemy(String name, String className, int maxHp, int accMod, int dodge, int crit, int prot, int minDmg, int maxDmg, int spd) {
 		super(name, className, maxHp, accMod, dodge, crit, prot, minDmg, maxDmg, spd);
@@ -22,10 +22,10 @@ public class Enemy extends Chara {
 				setMaxHp(10);
 				GameLogic.getCurrentStage().getStageCharaPane().getChildren().clear();
 				GameLogic.getCurrentStage().getStageCharaPane().addCharToPane();
-				for(Chara e :GameLogic.team) {
+				for(BaseCharacter e :GameLogic.team) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
-				for(Chara e :GameLogic.enemies) {
+				for(BaseCharacter e :GameLogic.enemies) {
 					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 				}
 				boolean allDead = true;
@@ -62,10 +62,10 @@ public class Enemy extends Chara {
 						}
 						n++;
 					}
-					for(Chara e :GameLogic.team) {
+					for(BaseCharacter e :GameLogic.team) {
 						GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 					}
-					for(Chara e :GameLogic.enemies) {
+					for(BaseCharacter e :GameLogic.enemies) {
 						GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(e, 100);
 					}
 				}

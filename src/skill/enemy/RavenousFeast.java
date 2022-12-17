@@ -6,7 +6,7 @@ import java.util.Arrays;
 import audio.Audio;
 import battle.gui.CharaPane;
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +21,7 @@ public class RavenousFeast extends DamageSkill {
 	
 	private String healResult;
 	
-	public RavenousFeast(Chara user) {
+	public RavenousFeast(BaseCharacter user) {
 		super("RAVENOUSFEAST", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, 
 				logic.rank.third, logic.rank.fourth)), 0, 80, 5);
 	}
@@ -29,7 +29,7 @@ public class RavenousFeast extends DamageSkill {
 	@Override
 	public void cast() {
 		healResult = "";
-		for (Chara each: targets) {
+		for (BaseCharacter each: targets) {
 			if (isHit(each)) {
 				
 				int damageDeal = computeDamage(each);
@@ -51,7 +51,7 @@ public class RavenousFeast extends DamageSkill {
 	}
 	@Override
 	public void playAnimation() {
-		for(Chara e : targets) {
+		for(BaseCharacter e : targets) {
 			HBox animation = new HBox();
 			animation.setPrefWidth(1400);
 			animation.setMaxHeight(250);

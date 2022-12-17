@@ -6,7 +6,7 @@ import java.util.Arrays;
 import audio.Audio;
 import battle.gui.CharaPane;
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +22,7 @@ import sprites.IdleSprite;
 
 public class DivineGrace extends HealSkill implements TargetSelectable {
 
-	public DivineGrace(Chara user) {
+	public DivineGrace(BaseCharacter user) {
 		super("DivineGrace", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)), 4, 5);
 	}
 
@@ -38,7 +38,7 @@ public class DivineGrace extends HealSkill implements TargetSelectable {
 
 	@Override
 	public void playAnimation() {
-		for (Chara e : targets) {
+		for (BaseCharacter e : targets) {
 			HBox animation = new HBox();
 			StackPane healBox = new StackPane();
 			healBox.setAlignment(Pos.CENTER);

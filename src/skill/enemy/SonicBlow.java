@@ -6,7 +6,7 @@ import java.util.Arrays;
 import audio.Audio;
 import battle.gui.CharaPane;
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,13 +19,13 @@ import sprites.AttackedSprite;
 
 public class SonicBlow extends DamageSkill {
 
-	public SonicBlow(Chara user) {
+	public SonicBlow(BaseCharacter user) {
 		super("SONICBLOW", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 0, 6);
 	}
 	
 	@Override
 	public void playAnimation() {
-		for(Chara e : targets) {
+		for(BaseCharacter e : targets) {
 			HBox animation = new HBox();
 			animation.setPrefWidth(1400);
 			animation.setPrefHeight(740);

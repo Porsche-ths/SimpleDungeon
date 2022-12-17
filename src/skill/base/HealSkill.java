@@ -2,7 +2,7 @@ package skill.base;
 
 import java.util.ArrayList;
 
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import logic.GameLogic;
 
 public class HealSkill extends BaseSkill {
@@ -11,7 +11,7 @@ public class HealSkill extends BaseSkill {
 	private int maxHeal;
 	private String result;
 
-	public HealSkill(String skillName, Chara user, ArrayList<logic.rank> rank, int minHeal, int maxHeal) {
+	public HealSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank, int minHeal, int maxHeal) {
 		super(skillName, user, rank);
 		this.setMinHeal(minHeal);
 		this.setMaxHeal(maxHeal);
@@ -20,7 +20,7 @@ public class HealSkill extends BaseSkill {
 	@Override
 	public void cast() {
 		result = "";
-		for (Chara each: targets) {
+		for (BaseCharacter each: targets) {
 			int healAmount = computeHealAmount(each);
 			each.setHp(each.getHp() + healAmount);
 			if(targets.size() > 1) {
@@ -38,7 +38,7 @@ public class HealSkill extends BaseSkill {
 		return GameLogic.randomInt() < user.getCrit() ? true : false;
 	}
 	
-	private int computeHealAmount(Chara target) {
+	private int computeHealAmount(BaseCharacter target) {
 		int healAmount = GameLogic.randomRange(minHeal, maxHeal);
 		return (int) (isCrit() ? (healAmount * 1.5) : healAmount);
 	}

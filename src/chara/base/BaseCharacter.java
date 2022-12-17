@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import skill.base.BaseSkill;
 
-public abstract class Chara {
+public abstract class BaseCharacter {
 	protected String name, className;
 	protected int maxHp, hp, accMod, dodge, crit, prot, minDmg, maxDmg, spd, calculatedSpd;
 	protected ArrayList<BaseSkill> skills;
 	protected logic.rank rank;
 	protected boolean isAlive;
 
-	public Chara(String name, String className, int maxHp, int accMod, int dodge, int crit, int prot, int minDmg, int maxDmg, int spd) {
+	public BaseCharacter(String name, String className, int maxHp, int accMod, int dodge, int crit, int prot, int minDmg, int maxDmg, int spd) {
 		setSkills(new ArrayList<BaseSkill>());
 		setName(name);
 		setClassName(className);

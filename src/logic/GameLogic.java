@@ -8,7 +8,7 @@ import app.Main;
 import audio.Audio;
 import battle.gui.BattleStage;
 import chara.base.Ally;
-import chara.base.Chara;
+import chara.base.BaseCharacter;
 import chara.base.Enemy;
 import chara.enemy.DarkLord;
 import chara.enemy.Executioner;
@@ -38,13 +38,13 @@ public class GameLogic {
 	public static ArrayList<Ally> team;
 	public static ArrayList<Enemy> enemies;
 	public static ArrayList<ArrayList<Enemy>> villains;
-	public static PriorityQueue<Chara> q;
+	public static PriorityQueue<BaseCharacter> q;
 	public static int stage;
 	private static boolean isGameEnd;
 	public static boolean win;
 	private static boolean isStageCleared;
 	public static BattleStage currentStage;
-	public static Chara currentChara;
+	public static BaseCharacter currentChara;
 	public static BaseSkill currentSkill;
 	
 	public static void newGame() {
@@ -180,13 +180,13 @@ public class GameLogic {
 	
 	public static  void generateQueue() {
 		
-		PriorityQueue<Chara> q = new PriorityQueue<Chara>(8, new SpeedComparator());
-		for (Chara ally: team) {
+		PriorityQueue<BaseCharacter> q = new PriorityQueue<BaseCharacter>(8, new SpeedComparator());
+		for (BaseCharacter ally: team) {
 			ally.setCalculatedSpd(randomRange(1, 8) + ally.getSpd());
 			q.add(ally);
 		}
 		
-		for (Chara enemy: enemies) {
+		for (BaseCharacter enemy: enemies) {
 			enemy.setCalculatedSpd(randomRange(1, 8) + enemy.getSpd());
 			q.add(enemy);
 		}
@@ -320,10 +320,10 @@ public class GameLogic {
 
 }
 
-class SpeedComparator implements Comparator<Chara>{
+class SpeedComparator implements Comparator<BaseCharacter>{
     
     @Override
-    public int compare(Chara c1, Chara c2) {
+    public int compare(BaseCharacter c1, BaseCharacter c2) {
         if (c1.getCalculatedSpd() < c2.getCalculatedSpd()) return 1;
         if (c1.getCalculatedSpd() > c2.getCalculatedSpd()) return -1;
         return 0;
