@@ -19,7 +19,6 @@ public class SkellySoldier extends Enemy {
 	public void beginTurn() {
 		if (this.isAlive()) {
 			BonySlash bonySlash = (BonySlash) getSkills().get(0);
-			bonySlash.setValid();
 			if (bonySlash.isValid()) {
 				int size = 0;
 				

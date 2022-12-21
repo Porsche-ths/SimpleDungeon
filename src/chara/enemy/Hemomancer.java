@@ -19,7 +19,6 @@ public class Hemomancer extends Enemy {
 	public void beginTurn() {
 		if (this.isAlive()) {
 			RavenousFeast ravenousFeast = (RavenousFeast) getSkills().get(0);
-			ravenousFeast.setValid();
 			if (ravenousFeast.isValid()) {
 				int size = GameLogic.getTeam().size();
 				

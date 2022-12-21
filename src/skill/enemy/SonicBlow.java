@@ -20,7 +20,8 @@ import sprites.AttackedSprite;
 public class SonicBlow extends DamageSkill {
 
 	public SonicBlow(BaseCharacter user) {
-		super("SONICBLOW", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 0, 6);
+		super("SONICBLOW", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 0, 6);
 	}
 	
 	@Override

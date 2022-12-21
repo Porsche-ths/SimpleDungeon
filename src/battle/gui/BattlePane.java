@@ -74,7 +74,6 @@ public class BattlePane extends VBox{
 				skillSquare.setFitHeight(75);
 				skillSquare.setFitWidth(75);
 				skillButton.getChildren().add(skillSquare);
-				s.setValid();
 				if (s.isValid()) {
 					playable = true;
 					skillButton.setOnMouseClicked(new EventHandler<Event>() {

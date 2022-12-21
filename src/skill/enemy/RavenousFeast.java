@@ -22,8 +22,8 @@ public class RavenousFeast extends DamageSkill {
 	private String healResult;
 	
 	public RavenousFeast(BaseCharacter user) {
-		super("RAVENOUSFEAST", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, 
-				logic.rank.third, logic.rank.fourth)), 0, 80, 5);
+		super("RAVENOUSFEAST", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, logic.rank.third, logic.rank.fourth)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, logic.rank.third, logic.rank.fourth)), 0, 80, 5);
 	}
 	
 	@Override

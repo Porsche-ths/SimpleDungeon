@@ -19,7 +19,6 @@ public class SkellyArcher extends Enemy {
 	public void beginTurn() {
 		if (this.isAlive()) {
 			BonyShot bonyShot = (BonyShot) getSkills().get(0);
-			bonyShot.setValid();
 			if (bonyShot.isValid()) {
 				int size = 0;
 				

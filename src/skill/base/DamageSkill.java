@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import chara.base.Ally;
 import chara.base.BaseCharacter;
-import chara.base.Enemy;
 import logic.GameLogic;
+import logic.rank;
 
 public class DamageSkill extends BaseSkill {
 
@@ -15,8 +15,8 @@ public class DamageSkill extends BaseSkill {
 	private int damageDeal;
 	protected String result;
 	
-	public DamageSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank, int dmgMod, int acc, int critMod) {
-		super(skillName, user, rank);
+	public DamageSkill(String skillName, BaseCharacter user, ArrayList<rank> userRank, ArrayList<rank> targetRank, int dmgMod, int acc, int critMod) {
+		super(skillName, user, userRank, targetRank);
 		this.setDmgMod(dmgMod);
 		this.setAcc(acc);
 		this.setCritMod(critMod);
@@ -25,36 +25,25 @@ public class DamageSkill extends BaseSkill {
 	@Override
 	public void cast() {
 		result = "";
-		for (BaseCharacter each: targets) {
-			if (each instanceof Ally) {
-				if (isHit(each)) {
-					damageDeal = computeDamage(each);
-					((Ally) each).setHp(each.getHp() - damageDeal);
-					result = "It dealt " + damageDeal + " damage!";
-					if(each.getHp()!=0) {
-					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
-					}
+		for (BaseCharacter target: this.getTargets()) {
+			if (isHit(target)) {
+				computeDamage(target);
+				target.setHp(target.getHp() - this.getDamageDeal());
+				if (this.getTargets().size() > 1) {
+					result += "It dealt " + this.getDamageDeal() + " damage!,";
 				} else {
-					result = "You dodged!";
+					result = "It dealt " + this.getDamageDeal() + " damage!";
+				}
+				if(target.getHp() != 0) {
+					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(target, 100);
 				}
 			} else {
-				if (isHit(each)) {
-					damageDeal = computeDamage(each);
-					((Enemy) each).setHp(each.getHp() - damageDeal);
-					if(targets.size() > 1) {
-						result += "It dealt " + damageDeal + " damage!,";
-					}
-					else {
-						result = "It dealt " + damageDeal + " damage!";
-					}
-					GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
+				if (target instanceof Ally) {
+					result = "You dodge!,";
+				} else if (this.getTargets().size() > 1) {
+					result += "It missed!,";
 				} else {
-					if(targets.size() > 1) {
-						result += "It missed!,";
-					}
-					else {
-						result = "It missed!";
-					}
+					result = "It missed!";
 				}
 			}
 		}
@@ -64,19 +53,19 @@ public class DamageSkill extends BaseSkill {
 	@Override
 	public void playAnimation() {}
 	
-	protected boolean isHit(BaseCharacter target) {
+	private boolean isHit(BaseCharacter target) {
 		int finalAcc = user.getAccMod() + getAcc() - target.getDodge();
 		return GameLogic.randomInt() < finalAcc ? true : false;
 	}
 	
-	protected boolean isCrit() {
+	private boolean isCrit() {
 		int finalCrit = user.getCrit() + getCritMod();
 		return GameLogic.randomInt() < finalCrit ? true : false;
 	}
 	
-	protected int computeDamage(BaseCharacter target) {
+	private void computeDamage(BaseCharacter target) {
 		float damage = (float) (GameLogic.randomRange(user.getMinDmg(), user.getMaxDmg()) * (1 + (((float)dmgMod)/100)));
-		return (int) (isCrit() ? (damage * 1.5) : damage);
+		this.setDamageDeal((int) (isCrit() ? (damage * 1.5) : damage));
 	}
 
 	public int getDmgMod() {
@@ -101,6 +90,14 @@ public class DamageSkill extends BaseSkill {
 
 	public void setCritMod(int critMod) {
 		this.critMod = critMod;
+	}
+	
+	public int getDamageDeal() {
+		return damageDeal;
+	}
+
+	public void setDamageDeal(int damageDeal) {
+		this.damageDeal = damageDeal;
 	}
 
 	public String getResult() {

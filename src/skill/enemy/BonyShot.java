@@ -18,11 +18,12 @@ import skill.base.DamageSkill;
 import sprites.AttackedSprite;
 
 public class BonyShot extends DamageSkill {
-
-	public BonyShot(BaseCharacter user) {
-		super("BONYSHOT", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)), 0, 0, 0);
-	}
 	
+	public BonyShot(BaseCharacter user) {
+		super("BONYSHOT", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third, logic.rank.fourth)), 0, 0, 0);
+	}
+
 	@Override
 	public void playAnimation() {
 		for(BaseCharacter e : targets) {

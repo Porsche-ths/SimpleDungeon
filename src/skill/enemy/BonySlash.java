@@ -20,9 +20,10 @@ import sprites.AttackedSprite;
 public class BonySlash extends DamageSkill {
 	
 	public BonySlash(BaseCharacter user) {
-		super("BONYSLASH", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 50, 2);
+		super("BONYSLASH", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 50, 2);
 	}
-	
+
 	@Override
 	public void playAnimation() {
 		for(BaseCharacter e : targets) {

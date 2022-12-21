@@ -7,15 +7,15 @@ import chara.base.BaseCharacter;
 public abstract class BaseSkill {
 	
 	protected String skillName;
-	protected BaseCharacter user;
-	protected ArrayList<logic.rank> rank;
-	protected boolean isValid;
+	protected final BaseCharacter user;
+	protected ArrayList<logic.rank> userRank, targetRank;
 	protected ArrayList<BaseCharacter> targets;
 	
-	public BaseSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank) {
+	public BaseSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> userRank, ArrayList<logic.rank> targetRank) {
 		this.setSkillName(skillName);
 		this.user = user;
-		this.setRank(rank);
+		this.setUserRank(userRank);
+		this.setTargetRank(targetRank);
 		this.setTargets(new ArrayList<BaseCharacter>());
 	}
 	
@@ -24,17 +24,7 @@ public abstract class BaseSkill {
 	public abstract void playAnimation();
 	
 	public boolean isValid() {
-		return this.isValid;
-	}
-	
-	public void setValid() {
-		boolean result = false;
-		if (user.isAlive()) {
-			for (logic.rank r: this.getRank()) {
-				if (r.equals(user.getRank())) { result = true; break; }
-			}	
-		}
-		this.isValid = result;
+		return this.getUserRank().contains(user.getRank());
 	}
 
 	public String getSkillName() {
@@ -45,12 +35,20 @@ public abstract class BaseSkill {
 		this.skillName = skillName;
 	}
 
-	public ArrayList<logic.rank> getRank() {
-		return rank;
+	public ArrayList<logic.rank> getUserRank() {
+		return userRank;
 	}
 
-	public void setRank(ArrayList<logic.rank> rank) {
-		this.rank = rank;
+	public void setUserRank(ArrayList<logic.rank> userRank) {
+		this.userRank = userRank;
+	}
+
+	public ArrayList<logic.rank> getTargetRank() {
+		return targetRank;
+	}
+
+	public void setTargetRank(ArrayList<logic.rank> targetRank) {
+		this.targetRank = targetRank;
 	}
 
 	public ArrayList<BaseCharacter> getTargets() {
@@ -62,7 +60,7 @@ public abstract class BaseSkill {
 	}
 
 	public BaseCharacter getUser() {
-		return user;
+		return this.user;
 	}
 	
 }

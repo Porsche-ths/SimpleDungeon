@@ -21,10 +21,10 @@ import sprites.AttackedSprite;
 public class DarkBolt extends DamageSkill {
 
 	public DarkBolt(BaseCharacter user) {
-		super("DARKBOLT", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, 
-				logic.rank.third, logic.rank.fourth)), 0, 85, 0);
+		super("DARKBOLT", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, logic.rank.third, logic.rank.fourth)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, logic.rank.third, logic.rank.fourth)), 0, 85, 0);
 	}
-	
+
 	@Override
 	public void playAnimation() {
 		for(BaseCharacter e : targets) {

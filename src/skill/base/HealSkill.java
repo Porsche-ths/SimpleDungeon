@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 import chara.base.BaseCharacter;
 import logic.GameLogic;
+import logic.rank;
 
 public class HealSkill extends BaseSkill {
 	
 	private int minHeal;
 	private int maxHeal;
+	private int healAmount;
 	private String result;
-
-	public HealSkill(String skillName, BaseCharacter user, ArrayList<logic.rank> rank, int minHeal, int maxHeal) {
-		super(skillName, user, rank);
+	
+	public HealSkill(String skillName, BaseCharacter user, ArrayList<rank> userRank, ArrayList<rank> targetRank, int minHeal, int maxHeal) {
+		super(skillName, user, userRank, targetRank);
 		this.setMinHeal(minHeal);
 		this.setMaxHeal(maxHeal);
 	}
@@ -21,26 +23,29 @@ public class HealSkill extends BaseSkill {
 	public void cast() {
 		result = "";
 		for (BaseCharacter each: targets) {
-			int healAmount = computeHealAmount(each);
-			each.setHp(each.getHp() + healAmount);
+			computeHealAmount(each);
+			each.setHp(each.getHp() + this.getHealAmount());
 			if(targets.size() > 1) {
-				result +="Restore " + healAmount + " HP!,";
+				result +="Restore " + this.getHealAmount() + " HP!,";
 			}
 			else {
-				result += "Restore " + healAmount + " HP!";
+				result += "Restore " + this.getHealAmount() + " HP!";
 			}
 			GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
 		}
 		targets.clear();
 	}
 	
+	@Override
+	public void playAnimation() {}
+	
 	private boolean isCrit() {
 		return GameLogic.randomInt() < user.getCrit() ? true : false;
 	}
 	
-	private int computeHealAmount(BaseCharacter target) {
+	private void computeHealAmount(BaseCharacter target) {
 		int healAmount = GameLogic.randomRange(minHeal, maxHeal);
-		return (int) (isCrit() ? (healAmount * 1.5) : healAmount);
+		this.setHealAmount((int) (isCrit() ? (healAmount * 1.5) : healAmount));
 	}
 
 	public int getMinHeal() {
@@ -58,10 +63,15 @@ public class HealSkill extends BaseSkill {
 	public void setMaxHeal(int maxHeal) {
 		this.maxHeal = maxHeal;
 	}
-
-	@Override
-	public void playAnimation() {}
 	
+	public int getHealAmount() {
+		return healAmount;
+	}
+
+	public void setHealAmount(int healAmount) {
+		this.healAmount = healAmount;
+	}
+
 	public String getResult() {
 		return result;
 	}
