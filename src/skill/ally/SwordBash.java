@@ -23,7 +23,8 @@ import sprites.CorpseSprite;
 public class SwordBash extends DamageSkill implements TargetSelectable {
 
 	public SwordBash(BaseCharacter user) {
-		super("SwordBash", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), -50, 90, 0);
+		super("SwordBash", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)),-50, 90, 0);
 	}
 
 	@Override

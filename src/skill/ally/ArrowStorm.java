@@ -23,7 +23,8 @@ import sprites.CorpseSprite;
 public class ArrowStorm extends DamageSkill implements TargetSelectable {
 
 	public ArrowStorm(BaseCharacter user) {
-		super("ArrowStorm", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)), -70, 85, 0);
+		super("ArrowStorm", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.third, logic.rank.fourth)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second, logic.rank.third, logic.rank.fourth)), -70, 85, 0);
 	}
 
 	@Override

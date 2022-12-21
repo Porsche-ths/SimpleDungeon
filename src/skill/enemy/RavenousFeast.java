@@ -29,23 +29,12 @@ public class RavenousFeast extends DamageSkill {
 	@Override
 	public void cast() {
 		healResult = "";
-		for (BaseCharacter each: targets) {
-			if (isHit(each)) {
-				
-				int damageDeal = computeDamage(each);
-				((Ally) each).setHp(each.getHp() - damageDeal);
-				result = "It dealt "+ damageDeal + " damage!";
-				
-				int selfHeal = (int) (damageDeal * 0.5);
-				healResult = "Also restore " + selfHeal + " HP!";
-				user.setHp(user.getHp() + selfHeal);
-				GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(user,100);
-				if(each.getHp()!=0) {
-				GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(each,100);
-				}
-			} else {
-				result = "You dodged!";
-			}
+		super.cast();
+		if (this.getDamageDeal() > 0) {
+			int selfHeal = (int) (this.getDamageDeal() * 0.5);
+			healResult = "Also restore " + selfHeal + " HP!";
+			user.setHp(user.getHp() + selfHeal);
+			GameLogic.getCurrentStage().getStageCharaPane().updateHpBar(user, 100);
 		}
 		targets.clear();
 	}

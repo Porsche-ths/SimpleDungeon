@@ -23,7 +23,8 @@ import sprites.CorpseSprite;
 public class DaggersPlay extends DamageSkill implements TargetSelectable {
 
 	public DaggersPlay(BaseCharacter user) {
-		super("DaggersPlay", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third, logic.rank.fourth)), 0, 90, 5);
+		super("DaggersPlay", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third, logic.rank.fourth)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.second, logic.rank.third)), 0, 90, 5);
 	}
 
 	@Override

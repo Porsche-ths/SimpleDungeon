@@ -23,7 +23,8 @@ import sprites.CorpseSprite;
 public class HolySmite extends DamageSkill implements TargetSelectable {
 
 	public HolySmite(BaseCharacter user) {
-		super("HolySmite", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 85, 0);
+		super("HolySmite", user, new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)),
+				new ArrayList<logic.rank>(Arrays.asList(logic.rank.first, logic.rank.second)), 0, 85, 0);
 	}
 
 	@Override
