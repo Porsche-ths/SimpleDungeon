@@ -39,7 +39,7 @@ public class DamageSkill extends BaseSkill {
 				}
 			} else {
 				if (target instanceof Ally) {
-					result = "You dodge!,";
+					result = "You dodge!";
 				} else if (this.getTargets().size() > 1) {
 					result += "It missed!,";
 				} else {

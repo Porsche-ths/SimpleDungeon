@@ -2,7 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import app.Main;
 import audio.Audio;
@@ -38,7 +37,7 @@ public class GameLogic {
 	private static ArrayList<Ally> team;
 	private static ArrayList<Enemy> enemies;
 	private static ArrayList<ArrayList<Enemy>> villains;
-	private static PriorityQueue<BaseCharacter> queue;
+	private static ArrayList<BaseCharacter> queue;
 	private static int stage;
 	private static boolean isGameEnd;
 	private static boolean isWin;
@@ -165,7 +164,7 @@ public class GameLogic {
 			}
 		} else {
 			if (queue.isEmpty()) generateQueue();
-			currentCharacter = queue.poll();
+			currentCharacter = queue.get(0); queue.remove(0);
 			if(currentCharacter instanceof Ally) {
 				GameLogic.getCurrentStage().getBattlePane().enableSkillMenu();
 			}
@@ -180,17 +179,18 @@ public class GameLogic {
 	
 	public static  void generateQueue() {
 		
-		PriorityQueue<BaseCharacter> q = new PriorityQueue<BaseCharacter>(8, new SpeedComparator());
+		queue = new ArrayList<BaseCharacter>(8);
 		for (BaseCharacter ally: team) {
 			ally.setCalculatedSpd(randomRange(1, 8) + ally.getSpd());
-			q.add(ally);
+			queue.add(ally);
 		}
 		
 		for (BaseCharacter enemy: enemies) {
 			enemy.setCalculatedSpd(randomRange(1, 8) + enemy.getSpd());
-			q.add(enemy);
+			queue.add(enemy);
 		}
-		queue = q;
+		
+		queue.sort(new SpeedComparator());
 		
 	}
 	
@@ -321,11 +321,11 @@ public class GameLogic {
 		GameLogic.villains = villains;
 	}
 
-	public static PriorityQueue<BaseCharacter> getQueue() {
+	public static ArrayList<BaseCharacter> getQueue() {
 		return queue;
 	}
 
-	public static void setQueue(PriorityQueue<BaseCharacter> q) {
+	public static void setQueue(ArrayList<BaseCharacter> q) {
 		GameLogic.queue = q;
 	}
 
@@ -386,6 +386,7 @@ public class GameLogic {
 	}
 
 }
+
 
 class SpeedComparator implements Comparator<BaseCharacter>{
     
