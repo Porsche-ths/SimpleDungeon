@@ -36,7 +36,7 @@ public class BattleStage  {
 		battlePane.setBackground(new Background(new BackgroundFill(new ImagePattern(bg), CornerRadii.EMPTY,Insets.EMPTY)));
 	}
 	private CharaPane initializeCharaPane() {
-		CharaPane stageCharaPane = new CharaPane(GameLogic.getTeam(),GameLogic.getVillains().get(stageNumber));
+		CharaPane stageCharaPane = new CharaPane();
 		return stageCharaPane;
 	}
 	public int getStageNumber() {

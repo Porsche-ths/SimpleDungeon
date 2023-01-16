@@ -1,7 +1,5 @@
 package battle.gui;
 
-import java.util.ArrayList;
-
 import chara.base.Ally;
 import chara.base.BaseCharacter;
 import chara.base.Enemy;
@@ -26,12 +24,8 @@ import sprites.IdleSprite;
 
 
 public class CharaPane extends HBox {
-	private ArrayList<Ally> team;
-	private ArrayList<Enemy> opponents;
 
-	public CharaPane(ArrayList<Ally> team, ArrayList<Enemy> opponents) {
-		this.team = team;
-		this.opponents = opponents;
+	public CharaPane() {
 		setPrefWidth(880);
 		setAlignment(Pos.CENTER);
 		setPrefHeight(83);
@@ -41,8 +35,8 @@ public class CharaPane extends HBox {
 		
 	}
 	public void addCharToPane() {
-		if(team.size() < 4) {
-			for(int i = 0; i < 4-team.size();i++) {
+		if(GameLogic.getTeam().size() < 4) {
+			for(int i = 0; i < 4 - GameLogic.getTeam().size();i++) {
 				Image blank = new Image("blank.png");
 				ImageView blankIdle = new ImageView(blank);
 				blankIdle.setFitHeight(120);
@@ -50,10 +44,10 @@ public class CharaPane extends HBox {
 				getChildren().add(blankIdle);
 			}
 		}
-		for(Ally a : team) {
-			ImageView idle = new IdleSprite(a.getClassName());
+		for(Ally ally : GameLogic.getTeam()) {
+			ImageView idle = new IdleSprite(ally.getClassName());
 			VBox charaBox = new VBox();
-			StackPane hp = initializeHpBar(100, a);
+			StackPane hp = initializeHpBar(100, ally);
 			
 			charaBox.getChildren().add(idle);
 			charaBox.setMaxHeight(200);
@@ -68,7 +62,7 @@ public class CharaPane extends HBox {
 					
 					GameLogic.getCurrentStage().getBattlePane().disableSkillMenu();
 					disableCharaBox();
-					GameLogic.getCurrentSkill().getTargets().add(a);
+					GameLogic.getCurrentSkill().getTargets().add(ally);
 					GameLogic.getCurrentSkill().playAnimation();
 					GameLogic.getCurrentSkill().cast();
 					charaBox.setDisable(true);
@@ -85,22 +79,22 @@ public class CharaPane extends HBox {
 		blankIdle.setFitHeight(120);
 		blankIdle.setFitWidth(140);
 		getChildren().add(blankIdle);
-		for(Enemy a : opponents) {
+		for(Enemy enemy : GameLogic.getEnemies()) {
 			VBox charaBox = new VBox();
 			ImageView idle = new ImageView();
 
-			if(a.isAlive()) {
-				 idle = new IdleSprite(a.getClassName());
+			if(enemy.isAlive()) {
+				 idle = new IdleSprite(enemy.getClassName());
 				charaBox.setAlignment(Pos.CENTER);
 
 			}
 			else {
-				idle = new CorpseSprite(a.getClassName());
+				idle = new CorpseSprite(enemy.getClassName());
 				charaBox.setAlignment(Pos.BOTTOM_CENTER);
 
 				
 			}
-			StackPane hp = initializeHpBar(100, a);
+			StackPane hp = initializeHpBar(100, enemy);
 			
 			charaBox.getChildren().add(idle);
 			charaBox.setMaxHeight(200);
@@ -112,7 +106,7 @@ public class CharaPane extends HBox {
 				@Override
 				public void handle(Event arg0) {
 					
-					GameLogic.getCurrentSkill().getTargets().add(a);
+					GameLogic.getCurrentSkill().getTargets().add(enemy);
 					GameLogic.getCurrentStage().getBattlePane().disableSkillMenu();
 					disableCharaBox();
 					GameLogic.getCurrentSkill().playAnimation();
@@ -124,8 +118,8 @@ public class CharaPane extends HBox {
 			
 			getChildren().add(charaBox);
 		}
-		if(opponents.size() < 4) {
-			for(int i = 0; i < 4-team.size();i++) {
+		if(GameLogic.getEnemies().size() < 4) {
+			for(int i = 0; i < 4 - GameLogic.getTeam().size();i++) {
 				Image blank2 = new Image(ClassLoader.getSystemResource("blank.png").toString());
 				ImageView blankIdle2 = new ImageView(blank2);
 				blankIdle2.setFitHeight(120);
